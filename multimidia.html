@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multimídia — Samuel Bole</title>
+  <meta name="description" content="Vídeo, áudio e mapa de Samuel Bole.">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <div class="wrap">
+      <a href="index.html" class="marca">Samuel<span>.</span>Bole</a>
+      <nav class="nav-principal" aria-label="Navegação principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="curriculo.html">Currículo</a></li>
+          <li><a href="formulario.html">Contato</a></li>
+          <li><a href="multimidia.html" aria-current="page">Multimídia</a></li>
+          <li><a href="graficos.html">Gráficos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="secao secao--topo">
+      <div class="wrap">
+        <div class="secao-cabecalho">
+          <h1>Multimídia</h1>
+          <p class="secao-intro">
+            Um pequeno vídeo de apresentação, um áudio e um mapa incorporado
+            da região onde estudo.
+          </p>
+        </div>
+
+        <article class="bloco-midia">
+          <h2>Vídeo de apresentação</h2>
+          <video controls width="640" poster="img/projeto1.png">
+            <source src="media/video-demo.mp4" type="video/mp4">
+            Seu navegador não suporta reprodução de vídeo. Você pode
+            <a href="media/video-demo.mp4">baixar o arquivo</a> para assistir.
+          </video>
+          <p class="legenda-midia">
+            Clipe placeholder gerado para este checkpoint — no site final
+            substituo por um vídeo real de 30 segundos me apresentando.
+          </p>
+        </article>
+
+        <article class="bloco-midia">
+          <h2>Áudio favorito de estudo</h2>
+          <audio controls>
+            <source src="media/audio-demo.mp3" type="audio/mpeg">
+            Seu navegador não suporta reprodução de áudio. Você pode
+            <a href="media/audio-demo.mp3">baixar o arquivo</a> para ouvir.
+          </audio>
+          <p class="legenda-midia">
+            Trilha instrumental curta que costumo ouvir enquanto programo —
+            arquivo de demonstração gerado para este checkpoint.
+          </p>
+        </article>
+
+        <article class="bloco-midia">
+          <h2>Youtube incorporado</h2>
+         
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/vOnGbpVJj7M?si=iPBCQIsIsmQFe3nU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p class="legenda-midia">
+            Vídeo incorporado do YouTube com dicas de estudo para
+            desenvolvedores front-end.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">
+      <p>&copy; 2026 Samuel Bole. Site pessoal desenvolvido para fins acadêmicos.</p>
+      <ul class="rodape-links">
+        <li><a href="curriculo.html">Currículo</a></li>
+        <li><a href="index.html">Início</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

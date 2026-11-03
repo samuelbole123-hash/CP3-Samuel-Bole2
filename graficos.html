@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gráficos — Samuel Bole</title>
+  <meta name="description" content="Gráfico de habilidades em canvas e emblema em SVG de Samuel Bole.">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <div class="wrap">
+      <a href="index.html" class="marca">Samuel<span>.</span>Bole</a>
+      <nav class="nav-principal" aria-label="Navegação principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="curriculo.html">Currículo</a></li>
+          <li><a href="formulario.html">Contato</a></li>
+          <li><a href="multimidia.html">Multimídia</a></li>
+          <li><a href="graficos.html" aria-current="page">Gráficos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="secao secao--topo">
+      <div class="wrap">
+        <div class="secao-cabecalho">
+          <h1>Gráficos</h1>
+          <p class="secao-intro">
+            Um gráfico de barras desenhado em <code>&lt;canvas&gt;</code> via
+            JavaScript e um emblema em SVG estilizado com CSS.
+          </p>
+        </div>
+
+        <article class="bloco-midia">
+          <h2>Autoavaliação de habilidades</h2>
+          <div class="area-canvas">
+            <canvas id="grafico-habilidades" width="640" height="320"
+              role="img"
+              aria-label="Gráfico de barras: HTML e CSS 90%, JavaScript 65%, Acessibilidade 75%, Git 60%, Design de interface 55%.">
+            </canvas>
+          </div>
+          <div class="controles-canvas">
+            <button type="button" id="btn-redesenhar">Redesenhar gráfico</button>
+            <button type="button" id="btn-cores">Trocar paleta</button>
+          </div>
+          <p class="legenda-midia">
+            O gráfico é desenhado inteiramente por script — nenhuma imagem
+            é usada. Os botões redesenham as barras e alternam a paleta de
+            cores usada no preenchimento.
+          </p>
+        </article>
+
+        <article class="bloco-midia">
+          <h2>Emblema pessoal</h2>
+          <svg class="emblema-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titulo-emblema desc-emblema">
+            <title id="titulo-emblema">Emblema com as iniciais SB</title>
+            <desc id="desc-emblema">Círculo contendo as letras S e B.</desc>
+            <circle class="anel" cx="75" cy="75" r="66"></circle>
+            <text class="marca-svg" x="75" y="88" text-anchor="middle">SB</text>
+          </svg>
+          <p class="legenda-midia">
+            Emblema simples com as minhas iniciais, desenhado em SVG e
+            estilizado inteiramente pelo CSS externo.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="wrap">
+      <p>&copy; 2026 Samuel Bole. Site pessoal desenvolvido para fins acadêmicos.</p>
+      <ul class="rodape-links">
+        <li><a href="curriculo.html">Currículo</a></li>
+        <li><a href="index.html">Início</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var canvas = document.getElementById('grafico-habilidades');
+      var ctx = canvas.getContext('2d');
+
+      var habilidades = [
+        { nome: 'HTML & CSS', valor: 90 },
+        { nome: 'JavaScript', valor: 65 },
+        { nome: 'Acessibilidade', valor: 75 },
+        { nome: 'Git', valor: 60 },
+        { nome: 'Design de UI', valor: 55 }
+      ];
+
+      var paletas = [
+        ['#2f6f4e', '#b08900', '#c46c41', '#23283a', '#7a8f7f'],
+        ['#3a6ea5', '#e0a458', '#c1666b', '#48466d', '#1b998b']
+      ];
+      var paletaAtual = 0;
+
+      function desenharGrafico() {
+        var w = canvas.width;
+        var h = canvas.height;
+        var margemEsquerda = 130;
+        var margemBaixo = 40;
+        var margemTopo = 20;
+        var larguraUtil = w - margemEsquerda - 30;
+        var alturaUtil = h - margemBaixo - margemTopo;
+        var cores = paletas[paletaAtual];
+
+        ctx.clearRect(0, 0, w, h);
+
+        ctx.strokeStyle = '#ddd4c2';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(margemEsquerda, margemTopo);
+        ctx.lineTo(margemEsquerda, h - margemBaixo);
+        ctx.lineTo(w - 10, h - margemBaixo);
+        ctx.stroke();
+
+        var alturaBarra = alturaUtil / habilidades.length * 0.6;
+        var espaco = alturaUtil / habilidades.length;
+
+        habilidades.forEach(function (item, i) {
+          var y = margemTopo + i * espaco + (espaco - alturaBarra) / 2;
+          var largura = (item.valor / 100) * larguraUtil;
+
+          ctx.fillStyle = cores[i % cores.length];
+          ctx.fillRect(margemEsquerda, y, largura, alturaBarra);
+
+          ctx.fillStyle = '#23283a';
+          ctx.font = '14px "Public Sans", sans-serif';
+          ctx.textAlign = 'right';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(item.nome, margemEsquerda - 12, y + alturaBarra / 2);
+
+          ctx.textAlign = 'left';
+          ctx.fillText(item.valor + '%', margemEsquerda + largura + 8, y + alturaBarra / 2);
+        });
+      }
+
+      document.getElementById('btn-redesenhar').addEventListener('click', function () {
+        habilidades.forEach(function (item) {
+          var variacao = Math.round((Math.random() - 0.5) * 10);
+          item.valor = Math.min(98, Math.max(35, item.valor + variacao));
+        });
+        desenharGrafico();
+      });
+
+      document.getElementById('btn-cores').addEventListener('click', function () {
+        paletaAtual = (paletaAtual + 1) % paletas.length;
+        desenharGrafico();
+      });
+
+      desenharGrafico();
+    })();
+  </script>
+
+</body>
+</html>
